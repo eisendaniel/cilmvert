@@ -6,9 +6,6 @@ Pass path of directory containing image sequence (of .tiffs for example) and ext
 
 `./im_seq_cvtr ~/Pictures/input_img png`
 
-Note: path should exclude trailing `/` and extension exclude leading `.`
+Note: exclude trailing `/` to place in dir next to original, include to place inside original dir.
 
-## Result
-
-A new directory with converted sequence at `[$origin_dir]_converted_to_[$extension]/`
 
