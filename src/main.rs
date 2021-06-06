@@ -1,6 +1,6 @@
 use rayon::prelude::*;
 use std::env;
-use std::path::{Path, PathBuf};
+use std::path::PathBuf;
 
 fn main() {
     let (from, extension) = if env::args().count() == 3 {
@@ -10,7 +10,7 @@ fn main() {
         std::process::exit(1);
     };
 
-    if !Path::new(&from).is_dir() {
+    if !PathBuf::from(&from).is_dir() {
         eprintln!("Error: given input path is invalid");
         std::process::exit(1);
     }
@@ -23,18 +23,22 @@ fn main() {
     //construct output dir string
     let output_dir = format!("{}_converted_to_{}", &from, &extension);
     match std::fs::create_dir(&output_dir) {
+        //did the dir get created?
         Ok(_) => {
+            // yes?
             paths.into_par_iter().for_each(|in_path| {
+                //parallel convert each image
                 let mut out_path = PathBuf::from(&output_dir); //parent path
                 out_path.push(in_path.file_stem().unwrap().to_str().unwrap()); //read and append filename to parent
                 out_path.set_extension(&extension);
 
-                if let Ok(tiff) = image::open(&in_path) {
-                    tiff.save(out_path).unwrap();
+                if let Ok(image) = image::open(&in_path) {
+                    image.save(out_path).unwrap();
                 }
             });
         }
         Err(e) => {
+            // no?
             eprintln!("Unable to create output directory\nError: {:?}", e);
         }
     }
