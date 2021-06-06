@@ -24,7 +24,6 @@ fn main() {
     let output_dir = format!("{}_converted_to_{}", &from, &extension);
     match std::fs::create_dir(&output_dir) {
         Ok(_) => {
-            let now = std::time::Instant::now();
             paths.into_par_iter().for_each(|in_path| {
                 let mut out_path = PathBuf::from(&output_dir); //parent path
                 out_path.push(in_path.file_stem().unwrap().to_str().unwrap()); //read and append filename to parent
@@ -34,7 +33,6 @@ fn main() {
                     tiff.save(out_path).unwrap();
                 }
             });
-            println!("{}", now.elapsed().as_millis());
         }
         Err(e) => {
             eprintln!("Unable to create output directory\nError: {:?}", e);
