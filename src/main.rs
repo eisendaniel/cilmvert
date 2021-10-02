@@ -3,6 +3,7 @@ use std::env;
 use std::path::PathBuf;
 
 fn main() {
+    //reading in dir to convert
     let (from, extension) = if env::args().count() == 3 {
         (env::args().nth(1).unwrap(), env::args().nth(2).unwrap())
     } else {
