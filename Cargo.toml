@@ -1,5 +1,5 @@
 [package]
-name = "img_seq_cvtr"
+name = "climvert"
 version = "0.1.0"
 authors = ["eisendaniel <danieleisen99@gmail.com>"]
 edition = "2018"

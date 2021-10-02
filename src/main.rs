@@ -6,14 +6,14 @@ fn main() {
     let (from, extension) = if env::args().count() == 3 {
         (env::args().nth(1).unwrap(), env::args().nth(2).unwrap())
     } else {
-        eprintln!("Error: Missing Args!\nUsage: ./img_seq_cvtr [folderpath] [extension]\ne.g. ./img_seq_cvtr ~/tiff_seq png");
+        eprintln!("Error: Missing Args!\nUsage: climvert [folderpath] [extension]\ne.g. climvert ~/tiff_seq png");
         std::process::exit(1);
     };
 
     if !PathBuf::from(&from).is_dir() {
         eprintln!("Error: given input path is invalid");
         std::process::exit(1);
-    }
+     }
 
     //scans input directory and converts to collection of paths
     let paths: Vec<PathBuf> = std::fs::read_dir(&from)
