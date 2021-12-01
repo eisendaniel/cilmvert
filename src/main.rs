@@ -7,13 +7,11 @@ fn main() {
     let (from, extension) = if env::args().count() == 3 {
         (env::args().nth(1).unwrap(), env::args().nth(2).unwrap())
     } else {
-        eprintln!("Error: Missing Args!\nUsage: climvert [folderpath] [extension]\ne.g. climvert ~/tiff_seq png");
-        std::process::exit(1);
+        panic!("Error: Missing Args!\nUsage: climvert [folderpath] [extension]\ne.g. climvert ~/tiff_seq png")
     };
 
     if !PathBuf::from(&from).is_dir() {
-        eprintln!("Error: given input path is invalid");
-        std::process::exit(1);
+        panic!("Error: given input path is invalid")
      }
 
     //scans input directory and converts to collection of paths
